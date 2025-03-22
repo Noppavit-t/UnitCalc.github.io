@@ -17,11 +17,13 @@
 
 /* CSS สำหรับส่วน Linear Equations */
 #linear-eq-tab {
-    padding: 15px;
+    padding: 10px;
 }
 
 .var-selection {
     margin-bottom: 20px;
+    justify-content: center;
+    display: flex;
 }
 
 .var-selection label {
@@ -48,6 +50,7 @@
     margin-left: 15px;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 }
 
 .equation-content span {
@@ -55,7 +58,7 @@
 }
 
 .coef-input, .const-input {
-    width: 72px;
+    width: 68px;
     padding: 8px;
     text-align: center;
     border: 1px solid #ccc;
