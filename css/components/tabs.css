@@ -1,0 +1,47 @@
+/* สไตล์ระบบแท็บ */
+.calculator-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #7c7c7c;
+    width: 100%;
+    padding-bottom: 2px;
+    justify-content: space-around;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: #d8ebff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+  background: var(--primary-color);
+  color: white;
+  position: relative;
+  bottom: 7px;
+}
+
+.tab-content-container {
+  width: 100%;
+  overflow: hidden;
+  background: rgb(255, 255, 255);
+}
+
+.tab-content-container .calculator-tab {
+  display: none;
+  width: 100%;
+  min-height: 500px;
+  padding: 1rem;
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tab-content-container .calculator-tab.active {
+  display: block;
+}

@@ -1,0 +1,76 @@
+/* Reset และสไตล์พื้นฐาน */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* สีพื้นฐานที่มีอยู่แล้ว */
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --background-color: #f0f2f5;
+    --text-color: #333;
+    --border-radius: 6px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    /* สีเพิ่มเติมสำหรับสถานะต่างๆ */
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --error-color: #e74c3c;
+    --info-color: #3498db;
+    
+    /* ระยะห่าง */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    
+    /* ขนาดฟอนต์ */
+    --font-small: 0.875rem;
+    --font-normal: 1rem;
+    --font-medium: 1.25rem;
+    --font-large: 1.5rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ทำให้ body มีความสูงเต็มหน้าจอ */
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* สไตล์พื้นฐานสำหรับองค์ประกอบที่ใช้บ่อย */
+button, input, select {
+    font-family: inherit;
+    font-size: var(--font-normal);
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+}
+
+button {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin: 0 auto;
+    position: sticky;
+    width: 100%;
+    z-index: 2000;
+}

@@ -1,0 +1,97 @@
+/* สไตล์เครื่องคิดเลข */
+.screen {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    text-align: right;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+}
+
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+/* CSS สำหรับส่วน Linear Equations */
+#linear-eq-tab {
+    padding: 15px;
+}
+
+.var-selection {
+    margin-bottom: 20px;
+}
+
+.var-selection label {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.equations-container {
+    margin-bottom: 20px;
+}
+
+.equation-row {
+    margin-bottom: 20px;
+}
+
+.equation-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.equation-content {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.equation-content span {
+    margin: 0 5px;
+}
+
+.coef-input, .const-input {
+    width: 72px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.result-box {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.result-box h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+#solution-result p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.error {
+    color: rgb(255, 36, 36);
+}
+
+/* สไตล์สำหรับ <option> ที่ถูก disabled */
+select option.option-disabled {
+    text-align: center; 
+    font-style: italic;
+    color: #999; 
+    background-color: #f0f0f0; 
+}
+
+select {
+    width: 100%;
+    padding: 8px; 
+    font-size: 16px; 
+}

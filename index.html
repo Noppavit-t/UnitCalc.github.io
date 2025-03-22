@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UnitCalc</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script type="module" src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.0/math.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Engineering Calculator with Unit Conversion</h1>
+    </header>
+
+    <main class="main-container">
+        <!-- ส่วนแปลงหน่วยทางวิทยาศาสตร์ (ซ้าย) -->
+        <div class="conversion-panel left-panel">
+            <h3>SI Prefix Conversion</h3>
+            <div class="conversion-group" id="si-prefix-conversion">
+                <div class="input-group">
+                    <input type="number" class="sci-input" placeholder="Input value" />
+                    <button class="set-btn">Set from Calculation</button>
+                </div>
+                <div class="custom-select">
+                    <!-- ปุ่มสำหรับเปิด/ปิด dropdown -->
+                    <div class="unit-dropdown-select" id="from-prefix">
+                        <span class="selected-value">-- select the first prefix --</span>
+                        <div class="arrow">&#9660;</div>
+                    </div>
+
+                    <!-- ส่วนของเมทริกซ์ที่ซ่อนอยู่ -->
+                    <div class="matrix-dropdown">
+                        <!-- ส่วนหัวตาราง -->
+                        <div class="dropdown-header">
+                            <div class="header-cell">Prefix</div>
+                            <div class="header-cell">Symbol</div>
+                            <div class="header-cell">Scientific</div>
+                        </div>
+
+                        <!-- ส่วนตัวเลือก -->
+                        <div class="dropdown-body">
+                            <div class="dropdown-row" value="1e15" data-row="1">
+                                <div class="dropdown-cell" data-col="1">Peta</div>
+                                <div class="dropdown-cell" data-col="2">P</div>
+                                <div class="dropdown-cell" data-col="2">10¹⁵</div>
+                            </div>
+                            <div class="dropdown-row" value="1e12" data-row="2">
+                                <div class="dropdown-cell">Tera</div>
+                                <div class="dropdown-cell">T</div>
+                                <div class="dropdown-cell">10¹²</div>
+                            </div>
+                            <div class="dropdown-row" value="1e9" data-row="3">
+                                <div class="dropdown-cell" data-col="1">Giga</div>
+                                <div class="dropdown-cell" data-col="2">G</div>
+                                <div class="dropdown-cell" data-col="3">10⁹</div>
+                            </div>
+                            <div class="dropdown-row" value="1e6" data-row="4">
+                                <div class="dropdown-cell" data-col="1">Mega</div>
+                                <div class="dropdown-cell" data-col="2">M</div>
+                                <div class="dropdown-cell" data-col="3">10⁶</div>
+                            </div>
+                            <div class="dropdown-row" value="1e3" data-row="5">
+                                <div class="dropdown-cell" data-col="1">Kilo</div>
+                                <div class="dropdown-cell" data-col="2">k</div>
+                                <div class="dropdown-cell" data-col="3">10³</div>
+                            </div>
+                            <div class="dropdown-row" value="1e2" data-row="6">
+                                <div class="dropdown-cell" data-col="1">Hecto</div>
+                                <div class="dropdown-cell" data-col="2">h</div>
+                                <div class="dropdown-cell" data-col="3">10²</div>
+                            </div>
+                            <div class="dropdown-row" value="1e1" data-row="7">
+                                <div class="dropdown-cell" data-col="1">Deca</div>
+                                <div class="dropdown-cell" data-col="2">da</div>
+                                <div class="dropdown-cell" data-col="3">10¹</div>
+                            </div>
+                            <div class="dropdown-row" value="1e0" data-row="8">
+                                <div class="dropdown-cell" data-col="1">Base</div>
+                                <div class="dropdown-cell" data-col="2">--</div>
+                                <div class="dropdown-cell" data-col="3">10⁰</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-1" data-row="9">
+                                <div class="dropdown-cell" data-col="1">Deci</div>
+                                <div class="dropdown-cell" data-col="2">d</div>
+                                <div class="dropdown-cell" data-col="3">10⁻¹</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-2" data-row="10">
+                                <div class="dropdown-cell" data-col="1">Centi</div>
+                                <div class="dropdown-cell" data-col="2">c</div>
+                                <div class="dropdown-cell" data-col="3">10⁻²</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-3" data-row="11">
+                                <div class="dropdown-cell" data-col="1">Milli</div>
+                                <div class="dropdown-cell" data-col="2">m</div>
+                                <div class="dropdown-cell" data-col="3">10⁻³</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-6" data-row="12">
+                                <div class="dropdown-cell" data-col="1">Micro</div>
+                                <div class="dropdown-cell" data-col="2">µ</div>
+                                <div class="dropdown-cell" data-col="3">10⁻⁶</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-9" data-row="13">
+                                <div class="dropdown-cell" data-col="1">Nano</div>
+                                <div class="dropdown-cell" data-col="2">n</div>
+                                <div class="dropdown-cell" data-col="3">10⁻⁹</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-12" data-row="14">
+                                <div class="dropdown-cell" data-col="1">Pico</div>
+                                <div class="dropdown-cell" data-col="2">p</div>
+                                <div class="dropdown-cell" data-col="3">10⁻¹²</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-15" data-row="15">
+                                <div class="dropdown-cell" data-col="1">Femto</div>
+                                <div class="dropdown-cell" data-col="2">f</div>
+                                <div class="dropdown-cell" data-col="3">10⁻¹⁵</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input ที่เก็บค่า from prefix ที่เลือก -->
+                    <input type="hidden" id="selected-from-prefix" />
+                </div>
+
+                <span class="conversion-arrow">⭣</span>
+
+                <div class="custom-select">
+                    <!-- ปุ่มสำหรับเปิด/ปิด dropdown -->
+                    <div class="unit-dropdown-select" id="to-prefix">
+                        <span class="selected-value">-- select the second prefix --</span>
+                        <div class="arrow">&#9660;</div>
+                    </div>
+
+                    <!-- ส่วนของเมทริกซ์ที่ซ่อนอยู่ -->
+                    <div class="matrix-dropdown">
+                        <!-- ส่วนหัวตาราง -->
+                        <div class="dropdown-header">
+                            <div class="header-cell">Prefix</div>
+                            <div class="header-cell">Symbol</div>
+                            <div class="header-cell">Scientific</div>
+                        </div>
+
+                        <!-- ส่วนตัวเลือก -->
+                        <div class="dropdown-body">
+                            <div class="dropdown-row" value="1e15" data-row="1">
+                                <div class="dropdown-cell" data-col="1">Peta</div>
+                                <div class="dropdown-cell" data-col="2">P</div>
+                                <div class="dropdown-cell" data-col="2">10¹⁵</div>
+                            </div>
+                            <div class="dropdown-row" value="1e12" data-row="2">
+                                <div class="dropdown-cell">Tera</div>
+                                <div class="dropdown-cell">T</div>
+                                <div class="dropdown-cell">10¹²</div>
+                            </div>
+                            <div class="dropdown-row" value="1e9" data-row="3">
+                                <div class="dropdown-cell" data-col="1">Giga</div>
+                                <div class="dropdown-cell" data-col="2">G</div>
+                                <div class="dropdown-cell" data-col="3">10⁹</div>
+                            </div>
+                            <div class="dropdown-row" value="1e6" data-row="4">
+                                <div class="dropdown-cell" data-col="1">Mega</div>
+                                <div class="dropdown-cell" data-col="2">M</div>
+                                <div class="dropdown-cell" data-col="3">10⁶</div>
+                            </div>
+                            <div class="dropdown-row" value="1e3" data-row="5">
+                                <div class="dropdown-cell" data-col="1">Kilo</div>
+                                <div class="dropdown-cell" data-col="2">k</div>
+                                <div class="dropdown-cell" data-col="3">10³</div>
+                            </div>
+                            <div class="dropdown-row" value="1e2" data-row="6">
+                                <div class="dropdown-cell" data-col="1">Hecto</div>
+                                <div class="dropdown-cell" data-col="2">h</div>
+                                <div class="dropdown-cell" data-col="3">10²</div>
+                            </div>
+                            <div class="dropdown-row" value="1e1" data-row="7">
+                                <div class="dropdown-cell" data-col="1">Deca</div>
+                                <div class="dropdown-cell" data-col="2">da</div>
+                                <div class="dropdown-cell" data-col="3">10¹</div>
+                            </div>
+                            <div class="dropdown-row" value="1e0" data-row="8">
+                                <div class="dropdown-cell" data-col="1">Base</div>
+                                <div class="dropdown-cell" data-col="2">--</div>
+                                <div class="dropdown-cell" data-col="3">10⁰</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-1" data-row="9">
+                                <div class="dropdown-cell" data-col="1">Deci</div>
+                                <div class="dropdown-cell" data-col="2">d</div>
+                                <div class="dropdown-cell" data-col="3">10⁻¹</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-2" data-row="10">
+                                <div class="dropdown-cell" data-col="1">Centi</div>
+                                <div class="dropdown-cell" data-col="2">c</div>
+                                <div class="dropdown-cell" data-col="3">10⁻²</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-3" data-row="11">
+                                <div class="dropdown-cell" data-col="1">Milli</div>
+                                <div class="dropdown-cell" data-col="2">m</div>
+                                <div class="dropdown-cell" data-col="3">10⁻³</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-6" data-row="12">
+                                <div class="dropdown-cell" data-col="1">Micro</div>
+                                <div class="dropdown-cell" data-col="2">µ</div>
+                                <div class="dropdown-cell" data-col="3">10⁻⁶</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-9" data-row="13">
+                                <div class="dropdown-cell" data-col="1">Nano</div>
+                                <div class="dropdown-cell" data-col="2">n</div>
+                                <div class="dropdown-cell" data-col="3">10⁻⁹</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-12" data-row="14">
+                                <div class="dropdown-cell" data-col="1">Pico</div>
+                                <div class="dropdown-cell" data-col="2">p</div>
+                                <div class="dropdown-cell" data-col="3">10⁻¹²</div>
+                            </div>
+                            <div class="dropdown-row" value="1e-15" data-row="15">
+                                <div class="dropdown-cell" data-col="1">Femto</div>
+                                <div class="dropdown-cell" data-col="2">f</div>
+                                <div class="dropdown-cell" data-col="3">10⁻¹⁵</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input ที่เก็บค่า to prefix ที่เลือก -->
+                    <input type="hidden" id="selected-to-prefix" />
+                </div>
+                <button class="convert-btn" onclick="convertSIPrefix()">
+                    Convert
+                </button>
+                <div class="result-box" id="si-result"></div>
+            </div>
+        </div>
+
+        <!-- เครื่องคิดเลขหลักพร้อมแท็บ -->
+        <div class="calculator-container">
+            <!-- ระบบแท็บ -->
+            <div class="calculator-tabs">
+                <button class="tab-btn active" data-tab="standard">Standard</button>
+                <button class="tab-btn" data-tab="scientific">Scientific</button>
+                <button class="tab-btn" data-tab="linear-eq">Linear Equations</button>
+                <button class="tab-btn" data-tab="formula">Formulas</button>
+            </div>
+
+            <!-- เนื้อหาแท็บทั้งหมด -->
+            <div class="tab-content-container">
+                <!-- แท็บพื้นฐาน -->
+                <div class="calculator-tab active" id="standard-tab" style="height: 400px">
+                    <div class="display">
+                        <input type="text" class="screen" placeholder="0" />
+                    </div>
+                    <div class="buttons-grid">
+                        <!-- ปุ่มเครื่องคิดเลขพื้นฐาน -->
+                        <button class="btn operator">AC</button>
+                        <button class="btn operator">(</button>
+                        <button class="btn operator">)</button>
+                        <button class="btn operator">DEL</button>
+
+                        <button class="btn number">7</button>
+                        <button class="btn number">8</button>
+                        <button class="btn number">9</button>
+                        <button class="btn operator">+</button>
+
+                        <button class="btn number">4</button>
+                        <button class="btn number">5</button>
+                        <button class="btn number">6</button>
+                        <button class="btn operator">-</button>
+
+                        <button class="btn number">1</button>
+                        <button class="btn number">2</button>
+                        <button class="btn number">3</button>
+                        <button class="btn operator">*</button>
+
+                        <button class="btn number">.</button>
+                        <button class="btn number">0</button>
+                        <button class="btn equals">=</button>
+                        <button class="btn operator">/</button>
+                    </div>
+                </div>
+                <!-- แท็บ Scientific -->
+                <div class="calculator-tab" id="scientific-tab">
+                    <div class="display">
+                        <input type="text" class="screen" placeholder="0" />
+                    </div>
+                    <div class="buttons-grid">
+                        <!-- ปุ่มเครื่องคิดเลขวิทยาศาสตร์ -->
+                        <button class="btn operator">AC</button>
+                        <button class="btn operator">(</button>
+                        <button class="btn operator">)</button>
+                        <button class="btn operator">DEL</button>
+
+                        <button class="btn scientific">sin</button>
+                        <button class="btn scientific">cos</button>
+                        <button class="btn scientific">tan</button>
+
+                        <button class="btn scientific">abs</button>
+                        <button class="btn scientific">e</button>
+                        <button class="btn scientific">log</button>
+                        <button class="btn scientific">ln</button>
+
+                        <button class="btn scientific">√</button>
+                        <button class="btn scientific">x²</button>
+                        <button class="btn scientific">^</button>
+                        <button class="btn scientific">%</button>
+                        <button class="btn operator">+</button>
+
+                        <button class="btn number">7</button>
+                        <button class="btn number">8</button>
+                        <button class="btn number">9</button>
+                        <button class="btn operator">-</button>
+
+
+                        <button class="btn number">4</button>
+                        <button class="btn number">5</button>
+                        <button class="btn number">6</button>
+                        <button class="btn operator">*</button>
+
+
+                        <button class="btn number">1</button>
+                        <button class="btn number">2</button>
+                        <button class="btn number">3</button>
+                        <button class="btn operator">/</button>
+
+                        <button class="btn number">π</button>
+                        <button class="btn number">0</button>
+                        <button class="btn number">.</button>
+                        <button class="btn equals">=</button>
+                    </div>
+                </div>
+                <!-- แท็บ Linear Equations -->
+                <div class="calculator-tab" id="linear-eq-tab">
+                    <h3>Linear Equations Solver</h3>
+
+                    <div class="var-selection">
+                        <label><input type="radio" name="var-count" value="2" checked> 2 variables</label>
+                        <label><input type="radio" name="var-count" value="3"> 3 variables</label>
+                    </div>
+
+                    <div class="linear-controls">
+                        <div id="equations-container" class="equations-container">
+                            <div class="equation-row">
+                                <div class="equation-label">Equation 1:</div>
+                                <div class="equation-content">
+                                    <input type="number" class="coef-input" placeholder="0" data-row="0" data-col="0">
+                                    <span>x +</span>
+                                    <input type="number" class="coef-input" placeholder="0" data-row="0" data-col="1">
+                                    <span>y</span>
+                                    <span class="z-term" style="display:none;"> +
+                                        <input type="number" class="coef-input" placeholder="0" data-row="0"
+                                            data-col="2">
+                                        <span>z</span>
+                                    </span>
+                                    <span> = </span>
+                                    <input type="number" class="const-input" placeholder="0" data-row="0">
+                                </div>
+                            </div>
+
+                            <div class="equation-row">
+                                <div class="equation-label">Equation 2:</div>
+                                <div class="equation-content">
+                                    <input type="number" class="coef-input" placeholder="0" data-row="1" data-col="0">
+                                    <span>x +</span>
+                                    <input type="number" class="coef-input" placeholder="0" data-row="1" data-col="1">
+                                    <span>y</span>
+                                    <span class="z-term" style="display:none;"> +
+                                        <input type="number" class="coef-input" placeholder="0" data-row="1"
+                                            data-col="2">
+                                        <span>z</span>
+                                    </span>
+                                    <span> = </span>
+                                    <input type="number" class="const-input" placeholder="0" data-row="1">
+                                </div>
+                            </div>
+
+                            <div class="equation-row eq3-row" style="display:none;">
+                                <div class="equation-label">Equation 3:</div>
+                                <div class="equation-content">
+                                    <input type="number" class="coef-input" placeholder="0" data-row="2" data-col="0">
+                                    <span>x +</span>
+                                    <input type="number" class="coef-input" placeholder="0" data-row="2" data-col="1">
+                                    <span>y +</span>
+                                    <input type="number" class="coef-input" placeholder="0" data-row="2" data-col="2">
+                                    <span>z</span>
+                                    <span> = </span>
+                                    <input type="number" class="const-input" placeholder="0" data-row="2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="solve-btn">compute</button>
+                        <button class="clear-btn">clear</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4>Result:</h4>
+                        <div id="solution-result"></div>
+                    </div>
+                </div>
+
+                <!-- แท็บ Formula -->
+                <div class="calculator-tab" id="formula-tab">
+                    <h3>Formulas:</h3>
+                    <div class="formula-controls">
+                        <!-- เลือกสูตร -->
+                        <select id="formula-select">
+                            <option value="" class="option-disabled" disabled selected>-- Select the formula --</option>
+                            <option value="pythagoras">Pythagorean Theorem (c = √(a² + b²))</option>
+                            <option value="" class="option-disabled" disabled>-- Mechanics --</option>
+                            <option value="newtons-second">Newton's Second Law (F = ma)</option>
+                            <option value="kinetic-energy">Kinetic Energy (Ek = ½mv²)</option>
+                            <option value="potential-energy">Gravitational Potential Energy (Ep = mgh)</option>
+                            <option value="" class="option-disabled" disabled>-- Electric --</option>
+                            <option value="ohms-law">Ohm's Law (P = VI)</option>
+                            <option value="electrical-power">Electrical Power (V = IR)</option>
+                            <option value="" class="option-disabled" disabled>-- Stress, Strain and Modulus --</option>
+                            <option value="strain">Strain (ε = ΔL/L₀)</option>
+                            <option value="stress">Stress (σ = F/A)</option>
+                            <option value="youngs-modulus">Young's Modulus E = σ/ε</option>
+                        </select>
+
+                        <!-- Input Fields (แสดงตามสูตรที่เลือก) -->
+                        <div id="input-fields"></div>
+                    </div>
+                    <div class="result-box" id="formula-result">Select a formula for calculation.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนแปลงหน่วยทั่วไป (ขวา) -->
+        <div class="conversion-panel right-panel">
+            <h3>Unit Conversion</h3>
+            <div class="conversion-group">
+                <div class="unit-input-group">
+                    <label for="unit-category" style="width: 200px;">Select Category:</label>
+                    <select id="unit-category">
+                        <option value="length">Length</option>
+                        <option value="mass">Mass</option>
+                        <option value="temperature">Temperature</option>
+                        <option value="time">Time</option>
+                        <option value="speed">Speed</option>
+                        <option value="volume">Volume</option>
+                        <option value="area">Area</option>
+                    </select>
+                </div>
+                <div class="unit-input-group" style="justify-content: space-around;">
+                    <input type="number" id="unit-input" placeholder="Enter value">
+                    <button class="set-btn">Set from Calculation</button>
+                </div>
+                <label for="from-unit">From:</label>
+                <select id="from-unit"></select>
+                <span class="conversion-arrow">⭣</span>
+                <label for="to-unit">To:</label>
+                <select id="to-unit"></select>
+                <button id="convert-btn">Convert</button>
+                <div class="result-box" id="unit-result"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="about-section">
+        <p>Engineering Tools for Students by Students</p>
+    </footer>
+</body>
+
+</html>

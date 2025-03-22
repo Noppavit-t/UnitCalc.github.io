@@ -1,0 +1,38 @@
+/* การจัดวางโครงสร้างหลัก */
+.main-container {
+    flex: 1;
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.calculator-container {
+    width: 500px;
+    max-width: 100%;
+    margin: 0 auto;
+    max-height: 720px;
+    min-height: 600px;
+    background: rgb(251, 251, 251);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden; 
+}
+
+.conversion-panel {
+    flex: 1;
+    max-width: 400px;
+    min-width: 375px;
+    max-height: 550px;
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
